@@ -1,12 +1,11 @@
 TARGET := tflite_micro_test
 OUTPUT_DIR := _build
-CXX = xt-xc++
+CXX = xt-clang++
 SRC_DIR := .
 TFLITE_SRC_DIR := tensorflow
 
 SRC_FILES += \
 	$(SRC_DIR)/main.cpp \
-	$(SRC_DIR)/sine_model.cpp \
 	$(SRC_DIR)/debug_log.c \
 	$(TFLITE_SRC_DIR)/tensorflow/lite/c/common.c \
 	$(TFLITE_SRC_DIR)/tensorflow/lite/core/api/error_reporter.cc \
@@ -64,7 +63,7 @@ SRC_FILES += \
 
 
 default:
-	$(CXX) -lstdc++  -fpermissive   $(SRC_FILES) -I$(TFLITE_SRC_DIR)  -Itenserflow -Ithird_party/flatbuffers/include -Ithird_party/gemmlowp -Ithird_party/ruy -o $(TARGET) 
+	$(CXX) -lstdc++  -std=c++11 -fpermissive   $(SRC_FILES) -I$(TFLITE_SRC_DIR)  -Itenserflow -Ithird_party/flatbuffers/include -Ithird_party/gemmlowp -Ithird_party/ruy -o $(TARGET) 
 	
 .PHONY clean:
 	rm $(TARGET)
